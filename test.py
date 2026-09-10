@@ -1,16 +1,16 @@
 from core.document_processor import DocumentProcessor
 
+from core.llm_service import JobRequirements
+
 def main():
 
-    file_path = "data/Resumes (43).pdf"
+    query = "What is Machine Learning?"
 
-    processor = DocumentProcessor()
+    service = JobRequirements()
 
-    text = processor.extract_text(file_path)
+    response = service.generate(query)
 
-    print(text[:500])
-
-    print("Characters:", len(text))
+    print(response)
 
 if __name__ == "__main__":
 
