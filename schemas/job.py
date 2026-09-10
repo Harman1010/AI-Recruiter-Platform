@@ -10,6 +10,6 @@ class JobSchema(BaseModel):
 
     responsibilities : list[str]
 
-    minimum_experience : float | None = None
+    minimum_experience_years : float | None = None
 
 

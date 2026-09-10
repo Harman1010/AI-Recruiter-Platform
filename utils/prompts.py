@@ -36,5 +36,81 @@ Example:
     "minimum_experience_years" : 3.2
 }
 
+Job Description:
+
+{jd_text}
+
+"""
+
+RESUME_PROMPT = """
+
+You are an AI recruitment assistant.
+
+Extract the candidate's information from their resume in a structured format
+
+The output must contain the following fields:-
+
+- Skills : The skills mentioned by the candidate in their resume
+
+- Experience : Professional work experience mentioned in the resume
+
+- Projects
+
+- Education
+
+- Certifications
+
+Instructions:-
+
+- Do not fabricate information
+
+- Do not invent any new information apart from what is present in the resume
+
+- Present the output strictly in the format below:-
+
+Example:-
+
+{
+
+    "skills" : ["Python","C++","LangChain","RAG"],
+    "experience" : [
+     {
+        "company" : "ABC Technologies",
+        "role" : "AI Engineer",
+        "years" : 2
+        }
+    ]
+    "projects" : [
+    
+        {
+            "name" : "AI Resume Optimization",
+            "description" : "Built a resume optimization system that takes candidate resume and provides detailed analysis."
+        
+        }
+    
+    ],
+
+    "certifications" : [
+       {
+
+        "name" : "Python with Machine Learning",
+        "issuer" : "Coursera"
+
+        }
+    ],
+
+    "education" : [
+    
+        {
+            "degree" : "B.Tech",
+            "field" : "Computer Science"
+        }
+    ]
+
+}
+
+ResumeText:
+
+{resume_text}
 
 """

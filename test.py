@@ -1,14 +1,18 @@
 from core.document_processor import DocumentProcessor
 
-from core.llm_service import JobRequirements
+from core.llm_service import LLMService
 
 def main():
 
-    query = "What is Machine Learning?"
+    file_path = "data/Resumes (43).pdf"
 
-    service = JobRequirements()
+    processor = DocumentProcessor()
 
-    response = service.generate(query)
+    text = processor.extract_text(file_path)
+
+    llmService = LLMService()
+
+    response = llmService.extract_resume_details(text)
 
     print(response)
 
