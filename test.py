@@ -2,20 +2,21 @@ from core.document_processor import DocumentProcessor
 
 from core.llm_service import LLMService
 
+from core.embeddings_service import EmbeddingsService
+
+
 def main():
 
-    file_path = "data/Resumes (43).pdf"
+    service = EmbeddingsService()
 
-    processor = DocumentProcessor()
+    text = "Built a RAG application using Python and LangChain."
 
-    text = processor.extract_text(file_path)
+    embedding = service.create_embedding(text)
 
-    llmService = LLMService()
+    print("Embedding type:", type(embedding))
+    print("Embedding shape:", embedding.shape)
+    print("First 5 values:", embedding[:5])
 
-    response = llmService.extract_resume_details(text)
-
-    print(response)
 
 if __name__ == "__main__":
-
     main()
