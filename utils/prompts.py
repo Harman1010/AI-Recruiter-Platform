@@ -15,6 +15,10 @@ Things to extract:-
                        specifies a minimum requirement. 
                        If no minimum experience is specified, return null. Do not infer or estimate experience requirements.
 
+- Education: Educational qualifications explicitly required or preferred.
+
+- Certifications: Certifications explicitly required or preferred.
+
 - Responsibilites : The responsibilities expected from candidate.
 
 Instructions:-
@@ -33,6 +37,8 @@ Example:
     "required_skills" : ["Python","C++","Django"],
     "preferred_skills" : ["AWS","Kubernetes","Cloud computing"],
     "responsibilities" : ["Build APIs using Django" , "Work in a collaborative environment"],
+    "education" : ["Bachelor's degree in Computer Science or related field],
+    "certifications" : ["AWS Certified preferred"],
     "minimum_experience_years" : 3.2
 }
 

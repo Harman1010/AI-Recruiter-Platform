@@ -1,6 +1,6 @@
 from core.normalization_service import NormalizationService
 
-class SkillMatchinService():
+class SkillMatchingService():
 
     """A blueprint for matching candidate skills with JD skills"""
 
@@ -27,6 +27,20 @@ class SkillMatchinService():
                 matches.append(normalized_jd_skill)
 
         return matches
+
+    def calculate_skill_score(jd_skills: list[str],resume_skills: list[str]) -> float:
+
+        if not jd_skills:
+            return 25.0
+
+        matches = SkillMatchingService.find_matches(
+            jd_skills,
+            resume_skills
+        )
+
+        match_ratio = len(matches) / len(jd_skills)
+
+        return match_ratio * 25
 
 
 

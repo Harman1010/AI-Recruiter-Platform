@@ -10,6 +10,10 @@ class JobSchema(BaseModel):
 
     responsibilities : list[str]
 
+    education: list[str]
+
+    certifications: list[str]
+
     minimum_experience_years : float | None = None
 
 
