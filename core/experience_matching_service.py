@@ -1,5 +1,7 @@
 class ExperienceMatchingService:
 
+    """A blueprint that matches experience of candidate with the JD"""
+
     def calculate_total_experience(self, experiences: list) -> float:
 
         total_experience = 0.0
@@ -18,7 +20,7 @@ class ExperienceMatchingService:
     ) -> float:
 
         if required_experience is None or required_experience == 0:
-            return 20.0
+            return 15.0
 
         candidate_experience = self.calculate_total_experience(
             experiences
@@ -26,6 +28,6 @@ class ExperienceMatchingService:
 
         score = (
             candidate_experience / required_experience
-        ) * 20
+        ) * 15
 
-        return min(score, 20.0)
+        return min(score, 15.0)

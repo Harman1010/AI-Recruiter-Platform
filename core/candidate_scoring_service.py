@@ -17,12 +17,12 @@ class CandidateScoringService():
         self.certification_service = CertificationMatchingService()
 
     def calculate_score(self, jd, candidate) -> float: 
-        skill_score = self.skill_service.calculate_skill_score(jd.required_skills, candidate.skills) 
-        #preferred_skill_score = self.skill_service.calculate_skill_score(jd.preferred_skills,candidate.preferred_skills)
+        skill_score = self.skill_service.calculate_skill_score(jd.required_skills, candidate.skills,25) 
+        preferred_skill_score = self.skill_service.calculate_skill_score(jd.preferred_skills,candidate.skills,15)
         experience_score = self.experience_service.calculate_experience_score(jd.minimum_experience_years, candidate.experience) 
-        project_score = self.project_service.calculate_project_score(jd.responsibilities, jd.required_skills, jd.preferred_skills, candidate.projects) 
+        project_score = self.project_service.calculate_project_score(jd.responsibilities, candidate.projects) 
         #education_score = self.education_service.calculate_education_score(jd.education, candidate.education) 
         certification_score = self.certification_service.calculate_certification_score(jd.certifications, candidate.certifications)
-        total_score = skill_score + experience_score + project_score + certification_score
+        total_score = skill_score + preferred_skill_score + experience_score + project_score + certification_score
         return total_score
 

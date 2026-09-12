@@ -48,15 +48,8 @@ class ProjectMatchingService():
         return sum(scores) / len(scores)
 
         
-    def calculate_project_score(self,responsibilities:list[str],required_skills:list[str],preferred_skills:list[str],projects
-                                :list[str]) -> float:
+    def calculate_project_score(self,responsibilities:list[str],projects:list[str]) -> float:
 
         responsibility_score = self.calculate_requirement_score(responsibilities,projects)
 
-        required_skills_score = self.calculate_requirement_score(required_skills,projects)
-
-        preferred_skills_score = self.calculate_requirement_score(preferred_skills,projects)
-
-        answer = responsibility_score * 0.60 + required_skills_score * 0.25 + preferred_skills_score * 0.15
-
-        return answer * 40
+        return responsibility_score * 40

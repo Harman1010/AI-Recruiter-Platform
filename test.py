@@ -33,17 +33,10 @@ def main():
     # Calculate individual scores
     # -------------------------
 
-    skill_score = scoring_service.skill_service.calculate_skill_score(
-        jd.required_skills,
-        candidate.skills
-    )
+    skill_score = scoring_service.skill_service.calculate_skill_score(jd.required_skills,candidate.skills,25)
+    preferred_skill_score = scoring_service.skill_service.calculate_skill_score(jd.preferred_skills,candidate.skills,15)
 
-    project_score = scoring_service.project_service.calculate_project_score(
-        jd.responsibilities,
-        jd.required_skills,
-        jd.preferred_skills,
-        candidate.projects
-    )
+    project_score = scoring_service.project_service.calculate_project_score(jd.responsibilities,candidate.projects)
 
     experience_score = scoring_service.experience_service.calculate_experience_score(
         jd.minimum_experience_years,
@@ -62,12 +55,13 @@ def main():
     print("\n========== SCORING ==========")
 
     print(f"Required Skills Score : {skill_score:.2f} / 25")
+    print(f"Preferred Skills Score : {preferred_skill_score:.2f} / 15")
     print(f"Project Score         : {project_score:.2f} / 40")
     print(f"Experience Score      : {experience_score:.2f} / 15")
     print(f"Certification Score   : {certification_score:.2f} / 5")
 
     total_score = (
-        skill_score
+        skill_score + preferred_skill_score
         + project_score
         + experience_score
         + certification_score
@@ -75,6 +69,30 @@ def main():
 
     print("--------------------------------")
     print(f"Current Score         : {total_score:.2f}")
+
+    print("\n========== PREFERRED SKILL SIMILARITY ==========")
+
+    for jd_skill in jd.preferred_skills:
+
+        best_score = 0.0
+        best_resume_skill = None
+
+        for resume_skill in candidate.skills:
+
+            score = scoring_service.skill_service.calculate_similarity(
+                jd_skill,
+                resume_skill
+            )
+
+            if score > best_score:
+                best_score = score
+                best_resume_skill = resume_skill
+
+        print(
+            f"{jd_skill} "
+            f"<-> {best_resume_skill} "
+            f"= {best_score:.4f}"
+        )
 
 
 if __name__ == "__main__":
