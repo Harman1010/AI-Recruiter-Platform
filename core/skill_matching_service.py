@@ -28,6 +28,8 @@ class SkillMatchingService():
 
         return matches
 
+    @staticmethod
+
     def calculate_skill_score(jd_skills: list[str],resume_skills: list[str]) -> float:
 
         if not jd_skills:

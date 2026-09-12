@@ -29,7 +29,7 @@ class LLMService():
 
     def extract_job_requirements(self,jd_text:str) -> JobSchema:
 
-        prompt = JD_PROMPT.format(jd_text=jd_text)
+        prompt = JD_PROMPT.replace("{jd_text}", jd_text)
 
         response = self.client.models.generate_content(
             model = "gemini-2.5-flash",

@@ -10,7 +10,7 @@ class JobSchema(BaseModel):
 
     responsibilities : list[str]
 
-    education: list[str]
+    #education: list[str]
 
     certifications: list[str]
 
