@@ -42,7 +42,7 @@ class CertificationMatchingService:
     def calculate_certification_score(self, requirements: list[str], certifications: list) -> float:
 
         if not requirements:
-            return 0.0
+            return 5.0
 
         scores = []
 

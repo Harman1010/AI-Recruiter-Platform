@@ -42,7 +42,7 @@ class SkillMatchingService():
 
         return float(embedding1 @ embedding2)
 
-    def find_semantic_matches(self,jd_skills:list[str],resume_skills:list[str],threshold:float = 0.70) -> list[str]:
+    def find_semantic_matches(self,jd_skills:list[str],resume_skills:list[str],threshold:float = 0.50) -> list[str]:
 
         semantic_matches = []
 
@@ -93,7 +93,7 @@ class SkillMatchingService():
                 if score > best_score:
                     best_score = score
 
-            if best_score >= 0.70:
+            if best_score >= 0.50:
                 matched_count += 1
 
         match_ratio = matched_count / len(jd_skills)
