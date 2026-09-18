@@ -4,7 +4,7 @@ from backend.routes.jobs import job_route
 
 from backend.routes.candidates import candidate_route
 
-from backend.routes.matches import match_route
+from backend.routes.matches import route as match_route
 
 app = FastAPI()
 
