@@ -102,3 +102,5 @@ temp/
 # Docker
 
 docker-compose.override.yml
+
+uploads/

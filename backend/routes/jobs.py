@@ -10,6 +10,8 @@ from pathlib import Path
 
 from uuid import uuid4
 
+from sqlalchemy import select
+
 job_route = APIRouter()
 
 UPLOAD_DIR = Path("uploads/jds")
@@ -78,3 +80,13 @@ async def create_job(
     db.refresh(new_job)
 
     return new_job
+
+@job_route.get("/jobs")
+
+def get_jobs(db = Depends(get_db)):
+
+    statement = select(Job)
+
+    jobs = db.execute(statement).scalars().all()
+
+    return jobs

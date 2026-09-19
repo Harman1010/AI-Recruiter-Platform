@@ -60,7 +60,7 @@ def create_match(
     match = Match(
         job_id=job_id,
         candidate_id=candidate_id,
-        total_score=score,
+        total_score=score["total_score"],
         required_skill_score=score["required_skill_score"],
         preferred_skill_score=score["preferred_skill_score"],
         project_score=score["project_score"],
@@ -74,4 +74,27 @@ def create_match(
 
     return match
 
+@route.get("/matches/{match_id}")
+def get_match_details(
+    match_id: int,
+    db: Session = Depends(get_db)
+):
+    match = db.get(Match, match_id)
 
+    if not match:
+        raise HTTPException(
+            status_code=404,
+            detail="Match not found"
+        )
+
+    return {
+        "match_id": match.id,
+        "job_id": match.job_id,
+        "candidate_id": match.candidate_id,
+        "total_score": match.total_score,
+        "required_skill_score": match.required_skill_score,
+        "preferred_skill_score": match.preferred_skill_score,
+        "project_score": match.project_score,
+        "experience_score": match.experience_score,
+        "certification_score": match.certification_score
+    }
