@@ -4,36 +4,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Recruiter Platform</title>
-    <link rel = "stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
     <header>
-        <h1> AI Recruiter Platform </h1>
+        <h1>AI Recruiter Platform</h1>
+        <p>Manage jobs, candidates and recruitment matching</p>
     </header>
+
     <main>
+
         <section class="actions">
-            <button id="jobs-button">Jobs</button>
-            <button id="candidate-button">Add Candidate</button>
-            <button id="create-job-button">Create Job</button>
+
+            <div class="action-card">
+                <h2>Jobs</h2>
+                <p>View your existing job openings.</p>
+                <button id="jobs-button">View Jobs</button>
+            </div>
+
+            <div class="action-card">
+                <h2>Create Job</h2>
+                <p>Create a new job using text or a file.</p>
+                <button id="create-job-button">Create Job</button>
+            </div>
+
+            <div class="action-card">
+                <h2>Candidates</h2>
+                <p>Add candidate resumes to the platform.</p>
+                <button id="candidate-button">Add Candidate</button>
+            </div>
+
         </section>
+
         <section class="ranking">
+
             <h2>Candidate Ranking</h2>
+            <p>Select a job to view ranked candidates.</p>
+
             <label for="job-select">Select Job</label>
+
             <select id="job-select">
-                <option>Select a Job</option>
+                <option>Select a job</option>
             </select>
+
             <table>
+
                 <tr>
                     <th>Rank</th>
                     <th>Candidate</th>
                     <th>Score</th>
                     <th>Details</th>
                 </tr>
+
+                <tr>
+                    <td>1</td>
+                    <td>Example Candidate</td>
+                    <td>82.4 / 100</td>
+                    <td>
+                        <button>View Details</button>
+                    </td>
+                </tr>
+
             </table>
 
         </section>
+
     </main>
-    <script src="script.js">
-    </script>
+
+    <script src="script.js"></script>
+
 </body>
 </html>
