@@ -6,6 +6,8 @@ from backend.routes.candidates import candidate_route
 
 from backend.routes.matches import route as match_route
 
+from backend.routes.ranking import ranking_route
+
 app = FastAPI()
 
 app.include_router(job_route)
@@ -13,3 +15,5 @@ app.include_router(job_route)
 app.include_router(candidate_route)
 
 app.include_router(match_route)
+
+app.include_router(ranking_route)
