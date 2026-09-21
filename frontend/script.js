@@ -18,6 +18,8 @@ const jobDescription = document.getElementById("job-description");
 
 const jobSubmit = document.getElementById("job-submit");
 
+const candidateJob = document.getElementById("candidate-job");
+
 const API_URL = "http://127.0.0.1:8000";
 
 async function loadJobs() {
@@ -81,7 +83,9 @@ async function loadRanking(jobId) {
             <td>${candidate.candidate_name}</td>
             <td>${candidate.score.toFixed(2)} / 100</td>
             <td>
-                <button>View Details</button>
+                <button onclick="showMatchDetails(${candidate.match_id})">
+                    View Details
+                </button>
             </td>
         `;
 
@@ -154,38 +158,59 @@ if (candidateSubmit) {
 
         const file = resumeFile.files[0];
 
-        if(!name) {
+        const jobId = candidateJob.value;
+
+
+        if (!name) {
             alert("Please enter a name");
             return;
         }
 
-        if(!file) {
+        if (!file) {
             alert("Please upload a resume");
             return;
         }
 
-        const formData = new FormData();
-
-        formData.append("name",name);
-        formData.append("resume",file);
-
-        const response = await fetch(
-            `${API_URL}/candidates`, {
-                method : "POST",
-                body : formData
-            });
-
-        const result = await response.json();
-
-        if(!response.ok) {
-            alert(result.detail || "Failed to create credentials");
+        if (!jobId) {
+            alert("Please select a job");
             return;
         }
 
-        alert("Candidate created successfully!");
+
+        const formData = new FormData();
+
+        formData.append("name", name);
+        formData.append("resume", file);
+
+
+        const response = await fetch(
+            `${API_URL}/candidates`,
+            {
+                method: "POST",
+                body: formData
+            }
+        );
+
+
+        const result = await response.json();
+
+
+        if (!response.ok) {
+            alert(result.detail || "Failed to create candidate");
+            return;
+        }
+
+
+        const candidateId = result.id;
+
+
+        await createMatch(jobId, candidateId);
+
 
         candidateName.value = "";
         resumeFile.value = "";
+        candidateJob.value = "";
+
     });
 
 }
@@ -248,4 +273,82 @@ if (candidateButton) {
         window.location.href = "add-candidate.html";
 
     });
+}
+
+async function createMatch(jobId, candidateId) {
+
+    const response = await fetch(
+        `${API_URL}/matches/${jobId}/${candidateId}`,
+        {
+            method: "POST"
+        }
+    );
+
+    const result = await response.json();
+
+    if (!response.ok) {
+        alert(result.detail || "Failed to create match");
+        return;
+    }
+
+    alert("Candidate matched successfully");
+}
+
+async function loadCandidateJobs() {
+
+    if (!candidateJob) {
+        return;
+    }
+
+    const response = await fetch(`${API_URL}/jobs`);
+
+    const jobs = await response.json();
+
+    candidateJob.innerHTML = "";
+
+    const defaultOption = document.createElement("option");
+
+    defaultOption.value = "";
+
+    defaultOption.textContent = "Select a job";
+
+    candidateJob.appendChild(defaultOption);
+
+
+    jobs.forEach(job => {
+
+        const option = document.createElement("option");
+
+        option.value = job.id;
+
+        option.textContent = job.title;
+
+        candidateJob.appendChild(option);
+    });
+}
+
+loadCandidateJobs();
+
+async function showMatchDetails(matchId) {
+
+    const response = await fetch(
+        `${API_URL}/matches/${matchId}`
+    );
+
+    const match = await response.json();
+
+    if (!response.ok) {
+        alert(match.detail || "Failed to load match details");
+        return;
+    }
+
+    alert(
+        `Match Details\n\n` +
+        `Total Score: ${match.total_score.toFixed(2)} / 100\n\n` +
+        `Required Skills: ${match.required_skill_score.toFixed(2)} / 25\n` +
+        `Preferred Skills: ${match.preferred_skill_score.toFixed(2)} / 15\n` +
+        `Projects: ${match.project_score.toFixed(2)} / 40\n` +
+        `Experience: ${match.experience_score.toFixed(2)} / 15\n` +
+        `Certifications: ${match.certification_score.toFixed(2)} / 5`
+    );
 }

@@ -1,28 +1,67 @@
-<section class="create">
+<!DOCTYPE html>
+<html lang="en">
 
-    <h2>Create Job</h2>
+<head>
 
-    <div id="job-container">
+    <meta charset="UTF-8">
 
-        <label for="job-title">Job Title</label>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <input
-            type="text"
-            id="job-title"
-            placeholder="Enter job title"
-        >
+    <title>Create Job - AI Recruiter Platform</title>
 
-        <label for="job-description">Job Description</label>
+    <link rel="stylesheet" href="style.css">
 
-        <textarea
-            id="job-description"
-            placeholder="Enter job description"
-        ></textarea>
+</head>
 
-        <button id="job-submit">
-            Create Job
-        </button>
+<body>
 
-    </div>
+    <header>
 
-</section>
+        <h1>Create Job</h1>
+
+        <p>Create a new job opening</p>
+
+    </header>
+
+
+    <main>
+
+        <section class="create">
+
+            <h2>Job Information</h2>
+
+            <div id="job-container">
+
+                <label for="job-title">Job Title</label>
+
+                <input
+                    type="text"
+                    id="job-title"
+                    placeholder="Enter job title"
+                >
+
+
+                <label for="job-description">Job Description</label>
+
+                <textarea
+                    id="job-description"
+                    placeholder="Enter job description"
+                ></textarea>
+
+
+                <button id="job-submit">
+                    Create Job
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
