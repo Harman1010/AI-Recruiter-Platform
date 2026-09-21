@@ -6,9 +6,25 @@ const candidateButton = document.getElementById("candidate-button");
 
 const jobSelect = document.getElementById("job-select");
 
+const candidateName = document.getElementById("candidate-name");
+
+const resumeFile = document.getElementById("resume-file");
+
+const candidateSubmit = document.getElementById("candidate-submit");
+
+const jobTitle = document.getElementById("job-title");
+
+const jobDescription = document.getElementById("job-description");
+
+const jobSubmit = document.getElementById("job-submit");
+
 const API_URL = "http://127.0.0.1:8000";
 
 async function loadJobs() {
+
+    if(!jobSelect) {
+        return;
+    }
     
     const response = await fetch(`${API_URL}/jobs`)
 
@@ -74,7 +90,8 @@ async function loadRanking(jobId) {
 
 }
 
-jobSelect.addEventListener("change", function () {
+if(jobSelect) {
+    jobSelect.addEventListener("change", function () {
 
     const jobId = this.value;
 
@@ -82,9 +99,153 @@ jobSelect.addEventListener("change", function () {
         return;
     }
 
-    console.log(loadRanking(jobId));
+    loadRanking(jobId);
 
-});
+    });
+
+}
 
 loadJobs();
 
+async function loadJobsPage() {
+
+    const jobsContainer = document.getElementById("jobs-container");
+
+    if (!jobsContainer) {
+        return;
+    }
+
+    const response = await fetch(`${API_URL}/jobs`);
+
+    const jobs = await response.json();
+
+    jobsContainer.innerHTML = "";
+
+    jobs.forEach(job => {
+
+        const jobCard = document.createElement("div");
+
+        jobCard.innerHTML = `
+            <h3>${job.title}</h3>
+            <p>${job.description}</p>
+        `;
+
+        jobsContainer.appendChild(jobCard);
+    });
+}
+
+loadJobsPage();
+
+if (jobsButton) {
+
+    jobsButton.addEventListener("click", function () {
+
+        window.location.href = "jobs.html";
+
+    });
+
+}
+
+if (candidateSubmit) {
+
+    candidateSubmit.addEventListener("click", async function () {
+
+        const name = candidateName.value;
+
+        const file = resumeFile.files[0];
+
+        if(!name) {
+            alert("Please enter a name");
+            return;
+        }
+
+        if(!file) {
+            alert("Please upload a resume");
+            return;
+        }
+
+        const formData = new FormData();
+
+        formData.append("name",name);
+        formData.append("resume",file);
+
+        const response = await fetch(
+            `${API_URL}/candidates`, {
+                method : "POST",
+                body : formData
+            });
+
+        const result = await response.json();
+
+        if(!response.ok) {
+            alert(result.detail || "Failed to create credentials");
+            return;
+        }
+
+        alert("Candidate created successfully!");
+
+        candidateName.value = "";
+        resumeFile.value = "";
+    });
+
+}
+
+if (jobSubmit) {
+
+    jobSubmit.addEventListener("click", async function () {
+
+        const title = jobTitle.value;
+
+        const description = jobDescription.value;
+
+        if (!title) {
+            alert("Please enter job title");
+            return;
+        }
+
+        if (!description) {
+            alert("Please enter job description");
+            return;
+        }
+
+        const formData = new FormData();
+
+        formData.append("title", title);
+        formData.append("description", description);
+
+        const response = await fetch(`${API_URL}/jobs`, {
+            method: "POST",
+            body: formData
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            alert(result.detail || "Failed to create job");
+            return;
+        }
+
+        alert("Job created successfully");
+
+        jobTitle.value = "";
+        jobDescription.value = "";
+    });
+}
+
+if (createButton) {
+
+    createButton.addEventListener("click", function () {
+
+        window.location.href = "create-job.html";
+
+    });
+}
+
+if (candidateButton) {
+
+    candidateButton.addEventListener("click", function () {
+
+        window.location.href = "add-candidate.html";
+
+    });
+}
