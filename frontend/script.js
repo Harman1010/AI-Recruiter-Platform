@@ -1,6 +1,6 @@
-const jobsButton = document.getElementById("job-button");
+const jobsButton = document.getElementById("jobs-button");
 
-const createButton = document.getElementById("create-jobs-button");
+const createButton = document.getElementById("create-job-button");
 
 const candidateButton = document.getElementById("candidate-button");
 
@@ -19,6 +19,10 @@ const jobDescription = document.getElementById("job-description");
 const jobSubmit = document.getElementById("job-submit");
 
 const candidateJob = document.getElementById("candidate-job");
+
+const matchModal = document.getElementById("match-modal");
+
+const modalClose = document.getElementById("modal-close");
 
 const API_URL = "http://127.0.0.1:8000";
 
@@ -338,17 +342,79 @@ async function showMatchDetails(matchId) {
     const match = await response.json();
 
     if (!response.ok) {
-        alert(match.detail || "Failed to load match details");
+        console.log("Status:", response.status);
+        console.log("Response:", match);
+
+        alert(
+            JSON.stringify(
+                match,
+                null,
+                2
+            )
+        );
+
         return;
     }
 
-    alert(
-        `Match Details\n\n` +
-        `Total Score: ${match.total_score.toFixed(2)} / 100\n\n` +
-        `Required Skills: ${match.required_skill_score.toFixed(2)} / 25\n` +
-        `Preferred Skills: ${match.preferred_skill_score.toFixed(2)} / 15\n` +
-        `Projects: ${match.project_score.toFixed(2)} / 40\n` +
-        `Experience: ${match.experience_score.toFixed(2)} / 15\n` +
-        `Certifications: ${match.certification_score.toFixed(2)} / 5`
-    );
+    document.getElementById("modal-total-score").textContent =
+        `${match.total_score.toFixed(2)} / 100`;
+
+    document.getElementById("modal-required-score").textContent =
+        `${match.required_skill_score.toFixed(2)} / 25`;
+
+    document.getElementById("modal-preferred-score").textContent =
+        `${match.preferred_skill_score.toFixed(2)} / 15`;
+
+    document.getElementById("modal-project-score").textContent =
+        `${match.project_score.toFixed(2)} / 40`;
+
+    document.getElementById("modal-experience-score").textContent =
+        `${match.experience_score.toFixed(2)} / 15`;
+
+    document.getElementById("modal-certification-score").textContent =
+        `${match.certification_score.toFixed(2)} / 5`;
+
+
+    document.getElementById("required-bar").style.width =
+        `${(match.required_skill_score / 25) * 100}%`;
+
+    document.getElementById("preferred-bar").style.width =
+        `${(match.preferred_skill_score / 15) * 100}%`;
+
+    document.getElementById("project-bar").style.width =
+        `${(match.project_score / 40) * 100}%`;
+
+    document.getElementById("experience-bar").style.width =
+        `${(match.experience_score / 15) * 100}%`;
+
+    document.getElementById("certification-bar").style.width =
+        `${(match.certification_score / 5) * 100}%`;
+
+
+    document.getElementById("match-modal").style.display = "flex";
+}
+
+if (modalClose) {
+
+    modalClose.addEventListener("click", function () {
+
+        matchModal.style.display = "none";
+
+    });
+
+}
+
+
+if (matchModal) {
+
+    matchModal.addEventListener("click", function (event) {
+
+        if (event.target === matchModal) {
+
+            matchModal.style.display = "none";
+
+        }
+
+    });
+
 }

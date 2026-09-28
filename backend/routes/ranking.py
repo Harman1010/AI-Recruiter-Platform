@@ -42,7 +42,8 @@ def get_ranked_candidates(
             "candidate_id": candidate.id,
             "candidate_name": candidate.name,
             "resume_link": candidate.resume_link,
-            "score": match.total_score
+            "score": match.total_score,
+            "match_id" : match.id
         }
         for rank, (match, candidate) in enumerate(results, start=1)
     ]

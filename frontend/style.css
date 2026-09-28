@@ -108,3 +108,202 @@ td {
 th {
     background-color: #f4f6f8;
 }
+
+.create {
+    background-color: white;
+    width: 90%;
+    max-width: 850px;
+    margin: 50px auto;
+    padding: 35px 40px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+    box-sizing: border-box;
+}
+
+.create h2 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 26px;
+}
+
+.create label {
+    display: block;
+    margin-top: 24px;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.create input,
+.create textarea,
+.create select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+    font-family: inherit;
+    font-size: 15px;
+    background-color: white;
+}
+
+.create input:focus,
+.create textarea:focus,
+.create select:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+
+.create textarea {
+    min-height: 350px;
+    resize: vertical;
+    line-height: 1.5;
+}
+
+.create button {
+    margin-top: 28px;
+    padding: 12px 22px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.create {
+    background-color: white;
+    width: 90%;
+    max-width: 650px;
+    margin: 50px auto;
+    padding: 35px 40px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+    box-sizing: border-box;
+}
+
+.create h2 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 26px;
+}
+
+.create label {
+    display: block;
+    margin-top: 22px;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.create input[type="text"],
+.create input[type="file"],
+.create select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+    font-family: inherit;
+    font-size: 15px;
+    background-color: white;
+}
+
+.create input[type="text"]:focus,
+.create input[type="file"]:focus,
+.create select:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+
+.create input[type="file"] {
+    cursor: pointer;
+}
+
+.create button {
+    margin-top: 28px;
+    padding: 12px 22px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    position: relative;
+    background-color: white;
+    width: 90%;
+    max-width: 600px;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+
+    background: none;
+    color: #555;
+
+    font-size: 26px;
+    padding: 2px 8px;
+}
+
+.modal-close:hover {
+    background: none;
+    color: #111;
+}
+
+.total-score {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #f4f6f8;
+    border-radius: 8px;
+}
+
+.total-score p {
+    margin: 0 0 5px;
+    color: #666;
+}
+
+.total-score h3 {
+    margin: 0;
+    font-size: 32px;
+}
+
+.score-item {
+    margin-bottom: 22px;
+}
+
+.score-item > div:first-child {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.score-bar {
+    height: 10px;
+    background-color: #e5e7eb;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.score-bar div {
+    height: 100%;
+    width: 0;
+    background-color: #d125eb;
+    border-radius: 5px;
+}
