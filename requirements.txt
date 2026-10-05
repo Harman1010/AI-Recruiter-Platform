@@ -8,7 +8,7 @@ pydantic-settings
 
 python-dotenv
 
-google-generativeai
+google-genai
 langchain-core
 langchain-community
 
