@@ -79,7 +79,6 @@ logs/
 *.h5
 *.hdf5
 *.onnx
-models/
 checkpoints/
 
 
