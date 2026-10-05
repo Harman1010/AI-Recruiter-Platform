@@ -24,7 +24,7 @@ const matchModal = document.getElementById("match-modal");
 
 const modalClose = document.getElementById("modal-close");
 
-const API_URL = "http://127.0.0.1:8000";
+const API_URL = "https://ai-recruiter-platform-rgs7.onrender.com";
 
 async function loadJobs() {
 
