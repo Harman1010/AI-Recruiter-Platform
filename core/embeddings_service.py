@@ -1,5 +1,3 @@
-from sentence_transformers import SentenceTransformer
-
 class EmbeddingsService():
 
     """A blueprint for initializing and creating embeddings"""
@@ -11,6 +9,9 @@ class EmbeddingsService():
     def create_embedding(self,text):
 
         if self.model is None:
+
+            from sentence_transformers import SentenceTransformer
+
             self.model = SentenceTransformer("all-MiniLM-L6-v2")
             
         return self.model.encode(text,normalize_embeddings=True)
