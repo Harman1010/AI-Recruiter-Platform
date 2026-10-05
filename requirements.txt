@@ -18,9 +18,3 @@ rank-bm25
 
 PyMuPDF
 python-docx
-
-numpy
-pandas
-scikit-learn
-torch
-transformers
