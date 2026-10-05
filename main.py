@@ -1,14 +1,14 @@
 from fastapi import FastAPI
-
 from fastapi.middleware.cors import CORSMiddleware
 
+from backend.database import Base, engine
 from backend.routes.jobs import job_route
-
 from backend.routes.candidates import candidate_route
-
 from backend.routes.matches import route as match_route
-
 from backend.routes.ranking import ranking_route
+
+
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
