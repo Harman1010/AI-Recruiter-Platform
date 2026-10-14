@@ -13,9 +13,6 @@ AI-based screening that ranks candidates based on their score out of 100 for a p
 
 ---
 
-
----
-
 ## Features
 
 - **AI-based screening:** Extracts relevant information from job descriptions and resumes.
