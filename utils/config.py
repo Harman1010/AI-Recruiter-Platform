@@ -12,6 +12,6 @@ class Settings(BaseSettings):
         env_file=".env"
     )
 
-    docker_database_url : str
+    #docker_database_url : str
 
 settings = Settings()
